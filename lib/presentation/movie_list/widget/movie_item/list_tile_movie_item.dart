@@ -1,6 +1,7 @@
 import 'package:athenaslab_test/presentation/movie_list/widget/poster_image.dart';
 import 'package:athenaslab_test/presentation/movie_list/widget/rating.dart';
 import 'package:athenaslab_test/symbols/color_list.dart';
+import 'package:athenaslab_test/symbols/route_list.dart';
 import 'package:athenaslab_test/utils/unit_helper.dart';
 import 'package:flutter/material.dart';
 
@@ -11,34 +12,39 @@ class ListTileMovieItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        child: Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        PosterImage(
-          width: 45,
-          height: 69,
-          borderRadius: 8.0,
-        ),
-        SizedBox(width: 16.0),
-        Expanded(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              MovieTitle(title: "Moonlight Movie"),
-              SizedBox(height: 4.0),
-              Rating(
-                rating: 3,
-              ),
-              SizedBox(height: 16.2),
-              buildMetaData()
-            ],
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).pushNamed(ScreenList.movieDetail);
+      },
+      child: Container(
+          child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          PosterImage(
+            width: 45,
+            height: 69,
+            borderRadius: 8.0,
           ),
-        ),
-      ],
-    ));
+          SizedBox(width: 16.0),
+          Expanded(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                MovieTitle(title: "Moonlight Movie"),
+                SizedBox(height: 4.0),
+                Rating(
+                  rating: 3,
+                ),
+                SizedBox(height: 16.2),
+                buildMetaData()
+              ],
+            ),
+          ),
+        ],
+      )),
+    );
   }
 
   Widget buildMetaData() {
