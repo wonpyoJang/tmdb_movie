@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'widget/area_titile.dart';
 import 'widget/horizontal_slider.dart';
 import 'widget/list_screen_area.dart';
 
@@ -21,21 +20,23 @@ class ListScreen extends StatelessWidget {
   }
 
   Widget buildBody(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox(height: 23),
-        buildCurrentScreeningArea(),
-        SizedBox(height: 40),
-        buildComingSoonArea(),
-        SizedBox(height: 24),
-        buildPopularArea(),
-        SizedBox(height: 24),
-        buildHighRatingArea(),
-        SizedBox(
-          height: 70,
-        )
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(height: 23),
+          buildCurrentScreeningArea(),
+          SizedBox(height: 40),
+          buildComingSoonArea(),
+          SizedBox(height: 24),
+          buildPopularArea(),
+          SizedBox(height: 24),
+          buildHighRatingArea(),
+          SizedBox(
+            height: 70,
+          )
+        ],
+      ),
     );
   }
 
@@ -43,7 +44,7 @@ class ListScreen extends StatelessWidget {
     return Padding(
         padding: EdgeInsets.only(left: 16.0),
         child: ListScreenArea(
-          title: "높은 평점",
+          title: "현재 상영중",
           content: HorizontalSlider(width: 196),
         ));
   }
@@ -51,18 +52,26 @@ class ListScreen extends StatelessWidget {
   Widget buildComingSoonArea() {
     return Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.0),
-        child: AreaTitle(title: "개봉 예정"));
+        child: ListScreenArea(
+          title: "개봉 예정",
+          content: HorizontalSlider(width: 196),
+        ));
   }
 
   Widget buildPopularArea() {
     return Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.0),
-        child: AreaTitle(title: "인기"));
+        child: ListScreenArea(
+          title: "인기",
+          content: HorizontalSlider(width: 196),
+        ));
   }
 
   Widget buildHighRatingArea() {
     return Padding(
-        padding: EdgeInsets.only(left: 16.0),
-        child: AreaTitle(title: "현재 상영중"));
+        padding: EdgeInsets.only(left: 16.0), child: ListScreenArea(
+      title: "높은 평점",
+      content: HorizontalSlider(width: 196),
+    ));
   }
 }
