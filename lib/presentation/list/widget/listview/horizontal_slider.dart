@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'card_movie_item.dart';
+import '../movie_item/card_movie_item.dart';
 
 class HorizontalSlider extends StatelessWidget {
   final double width;

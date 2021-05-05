@@ -2,7 +2,7 @@ import 'package:athenaslab_test/presentation/list/widget/poster_image.dart';
 import 'package:athenaslab_test/presentation/list/widget/rating.dart';
 import 'package:flutter/material.dart';
 
-import 'movie_title.dart';
+import '../movie_title.dart';
 
 class CardMovieItem extends StatelessWidget {
   const CardMovieItem({Key? key}) : super(key: key);

@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'widget/horizontal_slider.dart';
+import 'widget/listview/horizontal_slider.dart';
 import 'widget/list_screen_area.dart';
+import 'widget/listview/vertical_list_view.dart';
 
 class ListScreen extends StatelessWidget {
   const ListScreen({Key? key}) : super(key: key);
@@ -54,7 +55,7 @@ class ListScreen extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 16.0),
         child: ListScreenArea(
           title: "개봉 예정",
-          content: HorizontalSlider(width: 196),
+          content: VerticalListView(),
         ));
   }
 
@@ -63,7 +64,7 @@ class ListScreen extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 16.0),
         child: ListScreenArea(
           title: "인기",
-          content: HorizontalSlider(width: 196),
+          content: VerticalListView(),
         ));
   }
 
@@ -71,7 +72,7 @@ class ListScreen extends StatelessWidget {
     return Padding(
         padding: EdgeInsets.only(left: 16.0), child: ListScreenArea(
       title: "높은 평점",
-      content: HorizontalSlider(width: 196),
+      content: VerticalListView(),
     ));
   }
 }
