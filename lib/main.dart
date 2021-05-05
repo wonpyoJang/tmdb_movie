@@ -1,5 +1,5 @@
 import 'package:athenaslab_test/presentation/movie_detail/movie_detail_screen.dart';
-import 'package:athenaslab_test/presentation/movie_list/list_screen.dart';
+import 'package:athenaslab_test/presentation/movie_list/main_movie_list_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'symbols/route_list.dart';
