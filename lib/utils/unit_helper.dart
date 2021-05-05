@@ -1,9 +1,9 @@
 class UnitHelper {
-  static getPixel({required double em}) {
-    return em / 16;
+  static double getPixel({required double em}) {
+    return em / 16.0;
   }
 
-  static getTextHeightRatio({required double heightInPixel, required double fontSizeInPixel}) {
+  static double getTextHeightRatio({required double heightInPixel, required double fontSizeInPixel}) {
     return heightInPixel / fontSizeInPixel;
   }
 }
