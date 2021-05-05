@@ -29,7 +29,5 @@ class Rating extends StatelessWidget {
         );
       }),
     );
-
-    return Star(isOn: true, size: 9);
   }
 }
