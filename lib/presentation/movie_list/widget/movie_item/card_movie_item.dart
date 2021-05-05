@@ -1,4 +1,4 @@
-import 'package:athenaslab_test/presentation/movie_list/widget/poster_image.dart';
+import 'package:athenaslab_test/presentation/widget/poster_image.dart';
 import 'package:athenaslab_test/presentation/movie_list/widget/rating.dart';
 import 'package:athenaslab_test/symbols/route_list.dart';
 import 'package:flutter/material.dart';
