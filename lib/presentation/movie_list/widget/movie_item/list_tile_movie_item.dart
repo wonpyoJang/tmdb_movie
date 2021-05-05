@@ -1,5 +1,5 @@
 import 'package:athenaslab_test/presentation/widget/poster_image.dart';
-import 'package:athenaslab_test/presentation/movie_list/widget/rating.dart';
+import 'package:athenaslab_test/presentation/widget/rating.dart';
 import 'package:athenaslab_test/symbols/color_list.dart';
 import 'package:athenaslab_test/symbols/route_list.dart';
 import 'package:athenaslab_test/utils/unit_helper.dart';
