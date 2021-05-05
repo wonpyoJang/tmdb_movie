@@ -142,7 +142,7 @@ class MovieDetailScreen extends StatelessWidget {
         ));
   }
 
-  buildSubArea({required String title, required Widget content}) {
+  Widget buildSubArea({required String title, required Widget content}) {
     return Padding(
       padding: const EdgeInsets.only(left: 16.0),
       child: Column(
