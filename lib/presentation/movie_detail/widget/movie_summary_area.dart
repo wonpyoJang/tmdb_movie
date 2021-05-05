@@ -4,17 +4,21 @@ import 'package:athenaslab_test/symbols/color_list.dart';
 import 'package:athenaslab_test/utils/unit_helper.dart';
 import 'package:flutter/material.dart';
 
-class MovieSummaryArea extends StatelessWidget implements PreferredSizeWidget {
-  const MovieSummaryArea({Key? key}) : super(key: key);
+class MovieInfoArea extends StatelessWidget {
+  const MovieInfoArea({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        buildBackgroundImage(),
-        buildRoundedConer(),
-        buildMovieSummary()
-      ],
+    return Container(
+      height: 297,
+      child: Stack(
+        children: [
+          SizedBox(height: 297),
+          buildBackgroundImage(),
+          buildRoundedConer(),
+          buildMovieSummary()
+        ],
+      ),
     );
   }
 
@@ -115,7 +119,7 @@ class MovieSummaryArea extends StatelessWidget implements PreferredSizeWidget {
 
   Widget buildBackgroundImage() {
     return Container(
-      height: 297,
+      height: 296,
       decoration: BoxDecoration(
         image: DecorationImage(
           fit: BoxFit.cover,
@@ -164,7 +168,4 @@ class MovieSummaryArea extends StatelessWidget implements PreferredSizeWidget {
       ),
     );
   }
-
-  @override
-  Size get preferredSize => Size.fromHeight(320);
 }
