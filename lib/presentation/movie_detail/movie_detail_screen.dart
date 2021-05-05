@@ -66,10 +66,12 @@ class MovieDetailScreen extends StatelessWidget {
         children: [buildReviewText(), buildReviewWriter()],
       ),
       decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(8.0)),
         color: Colors.white,
         boxShadow: [
           BoxShadow(
             color: ColorList.shadow,
+            blurRadius: 4.0,
           )
         ],
       ),
