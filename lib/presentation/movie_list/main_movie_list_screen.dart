@@ -41,13 +41,13 @@ class _MainMovieListScreenState extends State<MainMovieListScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(height: 23),
-          buildCurrentScreeningArea(context),
+          buildNowPlayingMovieArea(context),
           SizedBox(height: 40),
-          buildComingSoonArea(),
+          buildUpcomingMovieArea(),
           SizedBox(height: 24),
-          buildPopularArea(),
+          buildPopularMovieArea(),
           SizedBox(height: 24),
-          buildHighRatingArea(),
+          buildTopRatedArea(),
           SizedBox(
             height: 70,
           )
@@ -56,7 +56,7 @@ class _MainMovieListScreenState extends State<MainMovieListScreen> {
     );
   }
 
-  Widget buildCurrentScreeningArea(BuildContext context) {
+  Widget buildNowPlayingMovieArea(BuildContext context) {
     var viewModel = getViewModel(context, listen: true);
     return Padding(
         padding: EdgeInsets.only(left: 16.0),
@@ -65,42 +65,49 @@ class _MainMovieListScreenState extends State<MainMovieListScreen> {
           content: HorizontalSlider(
             height: 196,
             spacing: 17.0,
-            itemCount: 100,
-            itemBuilder: (context, index) => CardMovieItem(),
+            itemCount: viewModel.nowPlayingMovies.length,
+            itemBuilder: (context, index) =>
+                CardMovieItem(movie: viewModel.nowPlayingMovies[index]),
           ),
         ));
   }
 
-  Widget buildComingSoonArea() {
+  Widget buildUpcomingMovieArea() {
+    var viewModel = getViewModel(context, listen: true);
     return Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.0),
         child: ListScreenArea(
           title: "개봉 예정",
           content: VerticalListView(
               spacing: 8.0,
-              itemBuilder: (context, index) => ListTileMovieItem()),
+              itemBuilder: (context, index) =>
+                  ListTileMovieItem(movie: viewModel.upcomingMovies[index])),
         ));
   }
 
-  Widget buildPopularArea() {
+  Widget buildPopularMovieArea() {
+    var viewModel = getViewModel(context, listen: true);
     return Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.0),
         child: ListScreenArea(
           title: "인기",
           content: VerticalListView(
               spacing: 8.0,
-              itemBuilder: (context, index) => ListTileMovieItem()),
+              itemBuilder: (context, index) =>
+                  ListTileMovieItem(movie: viewModel.popularMovies[index])),
         ));
   }
 
-  Widget buildHighRatingArea() {
+  Widget buildTopRatedArea() {
+    var viewModel = getViewModel(context, listen: true);
     return Padding(
-        padding: EdgeInsets.only(left: 16.0),
+        padding: EdgeInsets.symmetric(horizontal: 16.0),
         child: ListScreenArea(
           title: "높은 평점",
           content: VerticalListView(
               spacing: 8.0,
-              itemBuilder: (context, index) => ListTileMovieItem()),
+              itemBuilder: (context, index) =>
+                  ListTileMovieItem(movie: viewModel.topRatedMovies[index])),
         ));
   }
 

@@ -5,12 +5,14 @@ class PosterImage extends StatelessWidget {
   final double width;
   final double height;
   final double borderRadius;
+  final String url;
 
   const PosterImage({
     Key? key,
     required this.width,
     required this.height,
     required this.borderRadius,
+    required this.url,
   }) : super(key: key);
 
   @override
@@ -19,8 +21,8 @@ class PosterImage extends StatelessWidget {
       width: width,
       height: height,
       decoration: BoxDecoration(
+        image: DecorationImage(image: NetworkImage(url)),
         borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
-        color: Colors.blue,
         boxShadow: [
           BoxShadow(
             blurRadius: 4.0,

@@ -1,3 +1,4 @@
+import 'package:athenaslab_test/data/model/movie.dart';
 import 'package:athenaslab_test/presentation/utils/unit_helper.dart';
 import 'package:athenaslab_test/presentation/widget/poster_image.dart';
 import 'package:athenaslab_test/presentation/widget/rating.dart';
@@ -8,7 +9,10 @@ import 'package:flutter/material.dart';
 import '../movie_title.dart';
 
 class ListTileMovieItem extends StatelessWidget {
-  const ListTileMovieItem({Key? key}) : super(key: key);
+
+  final Movie movie;
+
+  const ListTileMovieItem({Key? key, required this.movie}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +29,7 @@ class ListTileMovieItem extends StatelessWidget {
             width: 45,
             height: 69,
             borderRadius: 8.0,
+            url: movie.posterImage,
           ),
           SizedBox(width: 16.0),
           Expanded(
@@ -32,7 +37,7 @@ class ListTileMovieItem extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                MovieTitle(title: "Moonlight Movie"),
+                MovieTitle(title: movie.title),
                 SizedBox(height: 4.0),
                 Rating(
                   rating: 3,
@@ -51,12 +56,12 @@ class ListTileMovieItem extends StatelessWidget {
   Widget buildMetaData() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [buildGenre(), buildCreatedDate()],
+      children: [buildGenre(), buildReleaseDate()],
     );
   }
 
-  Widget buildCreatedDate() {
-    return Text("2016-08-03",
+  Widget buildReleaseDate() {
+    return Text(movie.releaseDate,
         textAlign: TextAlign.center,
         style: TextStyle(
           fontFamily: "NotoSansKR",
@@ -71,7 +76,7 @@ class ListTileMovieItem extends StatelessWidget {
   }
 
   Widget buildGenre() {
-    return Text("Action, Drama",
+    return Text(movie.genreIds.toString(),
         textAlign: TextAlign.center,
         style: TextStyle(
           fontFamily: "NotoSansKR",

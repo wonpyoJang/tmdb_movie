@@ -29,7 +29,7 @@ class MovieInfoArea extends StatelessWidget {
         margin: EdgeInsets.only(left: 16.0),
         child: Row(
           children: [
-            PosterImage(width: 104, height: 159, borderRadius: 8),
+            PosterImage(width: 104, height: 159, borderRadius: 8, url: ''),
             SizedBox(width: 16.0),
             Column(
               mainAxisSize: MainAxisSize.min,

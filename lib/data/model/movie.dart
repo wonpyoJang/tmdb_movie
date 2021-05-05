@@ -5,6 +5,11 @@ part 'movie.g.dart';
 @JsonSerializable()
 class Movie {
 
+  static String imageBase = "https://image.tmdb.org/t/p/w500/";
+
+  String get backdropImage => imageBase + backdropPath;
+  String get posterImage => imageBase + posterPath;
+
   @JsonKey(name: "adult")
   final bool adult;
 
