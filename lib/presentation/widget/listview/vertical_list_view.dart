@@ -19,7 +19,7 @@ class VerticalListView extends StatelessWidget {
         padding: EdgeInsets.zero,
         physics: NeverScrollableScrollPhysics(),
         shrinkWrap: true,
-        children: List.generate(itemCount, (index) {
+        children: List.generate(itemCount >= 3 ? 3 : itemCount, (index) {
           Widget content = itemBuilder(context, index);
 
           return Padding(

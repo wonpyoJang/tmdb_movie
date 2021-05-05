@@ -72,7 +72,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                 padding: const EdgeInsets.only(right: 16.0),
                 child: VerticalListView(
                   spacing: 16.0,
-                  itemCount: viewModel.reviews!.results!.length,
+                  itemCount: viewModel.reviews?.results?.length ?? 0,
                   itemBuilder: (context, index) {
                     if (viewModel.reviews?.results?[index] == null) {
                       return CircularProgressIndicator();
