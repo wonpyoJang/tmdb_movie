@@ -1,4 +1,3 @@
-import 'package:athenaslab_test/presentation/movie_list/widget/movie_item/list_tile_movie_item.dart';
 import 'package:flutter/material.dart';
 
 class VerticalListView extends StatelessWidget {
