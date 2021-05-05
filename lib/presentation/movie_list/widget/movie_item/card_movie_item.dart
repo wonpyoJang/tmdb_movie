@@ -35,6 +35,7 @@ class CardMovieItem extends StatelessWidget {
               SizedBox(width: 4.0),
               Rating(
                 rating: 3,
+                starSize: 9.0,
               )
             ],
           )),

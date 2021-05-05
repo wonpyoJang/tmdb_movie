@@ -4,8 +4,9 @@ import 'star.dart';
 
 class Rating extends StatelessWidget {
   final int rating;
+  final double starSize;
 
-  const Rating({Key? key, required this.rating}) : super(key: key);
+  const Rating({Key? key, required this.rating, required this.starSize}) : super(key: key);
 
   static const int MAX_STARS = 5;
 
@@ -27,7 +28,7 @@ class Rating extends StatelessWidget {
         return Container(
           child: Padding(
               padding: EdgeInsets.only(right: rightPadding),
-              child: Star(isOn: index <= rating - 1, size: 9)),
+              child: Star(isOn: index <= rating - 1, size: starSize)),
         );
       }),
     );

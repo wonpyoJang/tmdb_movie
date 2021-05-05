@@ -36,6 +36,7 @@ class ListTileMovieItem extends StatelessWidget {
                 SizedBox(height: 4.0),
                 Rating(
                   rating: 3,
+                  starSize: 9.0,
                 ),
                 SizedBox(height: 16.2),
                 buildMetaData()
