@@ -9,4 +9,5 @@ class ColorList {
   static const Color strongGrey = const Color(0xffB9B9B9);
   static const Color red = const Color(0xfff66060);
   static const Color strongRed = const Color(0xfff76060);
+  static const Color starYellow = const Color(0xfff1c644);
 }

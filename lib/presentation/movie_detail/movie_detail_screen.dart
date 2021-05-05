@@ -1,3 +1,6 @@
+import 'package:athenaslab_test/data/model/movie.dart';
+import 'package:athenaslab_test/data/model/review.dart';
+import 'package:athenaslab_test/presentation/movie_detail/movie_detail_view_model.dart';
 import 'package:athenaslab_test/presentation/movie_detail/widget/actor_item.dart';
 import 'package:athenaslab_test/presentation/movie_detail/widget/area_title.dart';
 import 'package:athenaslab_test/presentation/movie_detail/widget/movie_summary_area.dart';
@@ -6,32 +9,49 @@ import 'package:athenaslab_test/presentation/widget/listview/horizontal_slider.d
 import 'package:athenaslab_test/presentation/widget/listview/vertical_list_view.dart';
 import 'package:athenaslab_test/symbols/color_list.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class MovieDetailScreen extends StatelessWidget {
-  const MovieDetailScreen({Key? key}) : super(key: key);
+class MovieDetailScreen extends StatefulWidget {
+  final Movie movie;
+
+  const MovieDetailScreen({Key? key, required this.movie}) : super(key: key);
+
+  @override
+  _MovieDetailScreenState createState() => _MovieDetailScreenState();
+}
+
+class _MovieDetailScreenState extends State<MovieDetailScreen> {
+  @override
+  void initState() {
+    super.initState();
+    var viewModel = getViewModel(context, listen: false);
+    viewModel.getInitialContents();
+  }
 
   @override
   Widget build(BuildContext context) {
+    var viewModel = getViewModel(context, listen: true);
     return Scaffold(
       backgroundColor: Colors.white,
-      body: buildBody(),
+      body: buildBody(context),
     );
   }
 
-  Widget buildBody() {
+  Widget buildBody(BuildContext context) {
+    var viewModel = getViewModel(context, listen: true);
     return SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          MovieInfoArea(),
+          MovieInfoArea(movie: widget.movie),
           SizedBox(height: 24.0),
           buildSubArea(
               title: "개요",
               content: Padding(
                 padding: const EdgeInsets.only(right: 16.0),
-                child: buildMoviePlot(),
+                child: buildMovieOverview(),
               )),
           SizedBox(height: 24.0),
           buildSubArea(
@@ -40,7 +60,10 @@ class MovieDetailScreen extends StatelessWidget {
                 height: 54.0,
                 spacing: 16.0,
                 itemCount: 100,
-                itemBuilder: (context, index) => ActorItem(),
+                itemBuilder: (context, index) =>
+                    viewModel.casts?.cast?[index] != null
+                        ? ActorItem(cast: viewModel.casts!.cast![index])
+                        : CircularProgressIndicator(),
               )),
           SizedBox(height: 24.0),
           buildSubArea(
@@ -49,8 +72,14 @@ class MovieDetailScreen extends StatelessWidget {
                 padding: const EdgeInsets.only(right: 16.0),
                 child: VerticalListView(
                   spacing: 16.0,
+                  itemCount: viewModel.reviews!.results!.length,
                   itemBuilder: (context, index) {
-                    return buildReviewItem();
+                    if (viewModel.reviews?.results?[index] == null) {
+                      return CircularProgressIndicator();
+                    }
+
+                    return buildReviewItem(context,
+                        review: viewModel.reviews!.results![index]);
                   },
                 ),
               )),
@@ -60,11 +89,14 @@ class MovieDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget buildReviewItem() {
+  Widget buildReviewItem(BuildContext context, {required Review review}) {
     return Container(
       height: 71,
       child: Column(
-        children: [buildReviewText(), buildReviewWriter()],
+        children: [
+          buildReviewText(context, text: review.content ?? ""),
+          buildReviewWriter(context, title: review.author ?? "")
+        ],
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(8.0)),
@@ -79,7 +111,7 @@ class MovieDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget buildReviewWriter() {
+  Widget buildReviewWriter(BuildContext context, {required String title}) {
     return Row(
       children: [
         Expanded(child: Container()),
@@ -87,7 +119,7 @@ class MovieDetailScreen extends StatelessWidget {
           margin: const EdgeInsets.only(right: 8, bottom: 8),
           child: Container(
             height: 15,
-            child: Text("Cat Ellington",
+            child: Text(title,
                 textAlign: TextAlign.right,
                 style: TextStyle(
                   fontFamily: "NotoSansKR",
@@ -105,13 +137,14 @@ class MovieDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget buildReviewText() {
+  Widget buildReviewText(BuildContext context, {required String text}) {
+    var viewModel = getViewModel(context, listen: true);
+
     return Container(
       margin: EdgeInsets.only(left: 8.0, right: 8.0, top: 8.0, bottom: 4.0),
       child: Container(
         height: 36,
-        child: Text(
-            "As I'm writing this review, Darth Vader's theme music begins to build in my mind...",
+        child: Text(text,
             textAlign: TextAlign.left,
             style: TextStyle(
               fontFamily: "NotoSansKR",
@@ -127,9 +160,8 @@ class MovieDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget buildMoviePlot() {
-    return Text(
-        "종말을 맞이한 지구, 북극에는 외로운 과학자 오거스틴이 살아있다. 오거스틴은 탐사를 마치고 귀환하던 중 지구와 연락이 끊긴 우주 비행사 설리가 짧은 교신에 성공한다. 그는 설리와 그녀의 동료 우주 비행사들이 원인 불명의 재앙을 맞은 지구로 귀환하는 것을 막고자 분투하는데...",
+  Widget buildMovieOverview() {
+    return Text(widget.movie.overview,
         textAlign: TextAlign.left,
         style: TextStyle(
           fontFamily: "NotoSansKR",
@@ -157,5 +189,10 @@ class MovieDetailScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  MovieDetailViewModel getViewModel(BuildContext context,
+      {required bool listen}) {
+    return Provider.of<MovieDetailViewModel>(context, listen: listen);
   }
 }

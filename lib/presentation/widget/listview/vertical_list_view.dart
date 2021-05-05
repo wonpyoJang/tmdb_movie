@@ -3,9 +3,13 @@ import 'package:flutter/material.dart';
 class VerticalListView extends StatelessWidget {
   final Function itemBuilder;
   final double spacing;
+  final int itemCount;
 
   const VerticalListView(
-      {Key? key, required this.itemBuilder, required this.spacing})
+      {Key? key,
+      required this.itemBuilder,
+      required this.spacing,
+      required this.itemCount})
       : super(key: key);
 
   @override
@@ -15,7 +19,7 @@ class VerticalListView extends StatelessWidget {
         padding: EdgeInsets.zero,
         physics: NeverScrollableScrollPhysics(),
         shrinkWrap: true,
-        children: List.generate(3, (index) {
+        children: List.generate(itemCount, (index) {
           Widget content = itemBuilder(context, index);
 
           return Padding(

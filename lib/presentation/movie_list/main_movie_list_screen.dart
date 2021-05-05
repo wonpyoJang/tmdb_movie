@@ -25,13 +25,17 @@ class _MainMovieListScreenState extends State<MainMovieListScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var viewModel = getViewModel(context, listen: true);
+
     return Scaffold(
       // dummy appbar : 화면 영역을 status bar 아래로 제한한다.
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(0),
         child: Container(),
       ),
-      body: buildBody(context),
+      body: viewModel.isLoading
+          ? Center(child: CircularProgressIndicator())
+          : buildBody(context),
     );
   }
 
@@ -79,6 +83,7 @@ class _MainMovieListScreenState extends State<MainMovieListScreen> {
         child: ListScreenArea(
           title: "개봉 예정",
           content: VerticalListView(
+              itemCount: viewModel.upcomingMovies.length,
               spacing: 8.0,
               itemBuilder: (context, index) =>
                   ListTileMovieItem(movie: viewModel.upcomingMovies[index])),
@@ -92,6 +97,7 @@ class _MainMovieListScreenState extends State<MainMovieListScreen> {
         child: ListScreenArea(
           title: "인기",
           content: VerticalListView(
+              itemCount: viewModel.popularMovies.length,
               spacing: 8.0,
               itemBuilder: (context, index) =>
                   ListTileMovieItem(movie: viewModel.popularMovies[index])),
@@ -105,6 +111,7 @@ class _MainMovieListScreenState extends State<MainMovieListScreen> {
         child: ListScreenArea(
           title: "높은 평점",
           content: VerticalListView(
+              itemCount: viewModel.topRatedMovies.length,
               spacing: 8.0,
               itemBuilder: (context, index) =>
                   ListTileMovieItem(movie: viewModel.topRatedMovies[index])),

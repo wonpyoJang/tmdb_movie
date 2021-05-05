@@ -17,7 +17,8 @@ class CardMovieItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).pushNamed(ScreenList.movieDetail);
+        Navigator.of(context)
+            .pushNamed(ScreenList.movieDetail, arguments: movie);
       },
       child: Container(
           width: WIDTH,
@@ -37,7 +38,7 @@ class CardMovieItem extends StatelessWidget {
                 maxWidth: WIDTH,
               ),
               SizedBox(width: 4.0),
-              Rating(
+              RatingStars(
                 rating: (movie.voteAverage / 2).round(),
                 starSize: 9.0,
               )

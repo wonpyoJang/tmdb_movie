@@ -1,4 +1,7 @@
+import 'package:athenaslab_test/data/model/cast_response.dart';
+import 'package:athenaslab_test/data/model/movie_detail.dart';
 import 'package:athenaslab_test/data/model/movie_response.dart';
+import 'package:athenaslab_test/data/model/review_response.dart';
 import 'package:athenaslab_test/data/remote/movie_api.dart';
 import 'package:athenaslab_test/data/repository/movie_repository.dart';
 
@@ -12,5 +15,27 @@ class MovieRepositoryImpl implements MovieRepository{
     required MovieApiCallType type,
   }) {
     return movieApi.getMovies(type: type);
+  }
+
+  @override
+  Future<MovieDetail> getMovieDetail({
+    required int id,
+  }) {
+    return movieApi.getMovieDetail(id: id);
+  }
+
+  @override
+  Future<CastResponse> getMovieCast({
+    required int id,
+  }) {
+    return movieApi.getMovieCast(id: id);
+  }
+
+
+  @override
+  Future<ReviewResponse> getMovieReview({
+    required int id,
+  }) {
+    return movieApi.getMovieReview(id: id);
   }
 }

@@ -8,11 +8,17 @@ import 'package:athenaslab_test/domain/get_top_rated_movie_list_use_case.dart';
 import 'package:athenaslab_test/domain/get_upcoming_movie_list_use_case.dart';
 import 'package:flutter/material.dart';
 
-class MainMovieListViewModel extends ChangeNotifier{
+class MainMovieListViewModel extends ChangeNotifier {
   List<Movie> nowPlayingMovies = [];
   List<Movie> popularMovies = [];
   List<Movie> topRatedMovies = [];
   List<Movie> upcomingMovies = [];
+
+  get isLoading =>
+      nowPlayingMovies.isEmpty ||
+      popularMovies.isEmpty ||
+      topRatedMovies.isEmpty ||
+      upcomingMovies.isEmpty;
 
   GetNowPlayingMovieListUseCase getNowPlayingMovieListUseCase =
       GetNowPlayingMovieListUseCase(MovieRepositoryImpl(MovieApiImpl()));
@@ -39,6 +45,7 @@ class MainMovieListViewModel extends ChangeNotifier{
 
       notifyListeners();
     } catch (e) {
+      notifyListeners();
       await Future.delayed(Duration(milliseconds: 500));
       throw "데이터를 가져오지 못했습니다.";
     }

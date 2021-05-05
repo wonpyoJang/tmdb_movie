@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'star.dart';
 
-class Rating extends StatelessWidget {
+class RatingStars extends StatelessWidget {
   final int rating;
   final double starSize;
 
-  const Rating({Key? key, required this.rating, required this.starSize}) : super(key: key);
+  const RatingStars({Key? key, required this.rating, required this.starSize}) : super(key: key);
 
   static const int MAX_STARS = 5;
 

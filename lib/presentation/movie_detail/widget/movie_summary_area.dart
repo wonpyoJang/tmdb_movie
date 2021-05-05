@@ -1,3 +1,4 @@
+import 'package:athenaslab_test/data/model/movie.dart';
 import 'package:athenaslab_test/presentation/utils/unit_helper.dart';
 import 'package:athenaslab_test/presentation/widget/rating.dart';
 import 'package:athenaslab_test/presentation/widget/poster_image.dart';
@@ -5,7 +6,9 @@ import 'package:athenaslab_test/symbols/color_list.dart';
 import 'package:flutter/material.dart';
 
 class MovieInfoArea extends StatelessWidget {
-  const MovieInfoArea({Key? key}) : super(key: key);
+  final Movie movie;
+
+  const MovieInfoArea({Key? key, required this.movie}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +17,7 @@ class MovieInfoArea extends StatelessWidget {
       child: Stack(
         children: [
           SizedBox(height: 297),
-          buildBackgroundImage(),
+          buildBackdropImage(),
           buildRoundedConer(),
           buildMovieSummary()
         ],
@@ -22,33 +25,21 @@ class MovieInfoArea extends StatelessWidget {
     );
   }
 
-  Widget buildMovieSummary() {
-    return Align(
-      alignment: Alignment.bottomLeft,
-      child: Container(
-        margin: EdgeInsets.only(left: 16.0),
-        child: Row(
-          children: [
-            PosterImage(width: 104, height: 159, borderRadius: 8, url: ''),
-            SizedBox(width: 16.0),
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SizedBox(height: 67),
-                buildMovieTitle(),
-                SizedBox(height: 4),
-                buildAdultMark(),
-                SizedBox(height: 4),
-                buildGenre(),
-                SizedBox(height: 0.88),
-                buildPublishedDate(),
-                SizedBox(height: 7.98),
-                Rating(rating: 3, starSize: 13.0)
-              ],
-            )
-          ],
+  Widget buildMovieTitle() {
+    return Container(
+      height: 16.0,
+      child: Text(
+        movie.title,
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          fontFamily: "NotoSansKR",
+          fontStyle: FontStyle.normal,
+          fontWeight: FontWeight.w700,
+          fontSize: 12.0,
+          height: UnitHelper.getTextHeightRatio(
+              heightInPixel: 17.0, fontSizeInPixel: 12.0),
+          letterSpacing: UnitHelper.getPixel(em: -0.015),
+          color: ColorList.black,
         ),
       ),
     );
@@ -80,26 +71,6 @@ class MovieInfoArea extends StatelessWidget {
     );
   }
 
-  Widget buildMovieTitle() {
-    return Container(
-      height: 16.0,
-      child: Text(
-        "미드나이트 스카이",
-        textAlign: TextAlign.center,
-        style: TextStyle(
-          fontFamily: "NotoSansKR",
-          fontStyle: FontStyle.normal,
-          fontWeight: FontWeight.w700,
-          fontSize: 12.0,
-          height: UnitHelper.getTextHeightRatio(
-              heightInPixel: 17.0, fontSizeInPixel: 12.0),
-          letterSpacing: UnitHelper.getPixel(em: -0.015),
-          color: ColorList.black,
-        ),
-      ),
-    );
-  }
-
   Widget buildRoundedConer() {
     return Align(
       alignment: Alignment.bottomCenter,
@@ -117,13 +88,77 @@ class MovieInfoArea extends StatelessWidget {
     );
   }
 
-  Widget buildBackgroundImage() {
+  Widget buildMovieSummary() {
+    return Align(
+      alignment: Alignment.bottomLeft,
+      child: Container(
+        margin: EdgeInsets.only(left: 16.0),
+        child: Row(
+          children: [
+            PosterImage(width: 104, height: 159, borderRadius: 8, url: movie.posterImage),
+            SizedBox(width: 16.0),
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(height: 67),
+                buildMovieTitle(),
+                SizedBox(height: 4),
+                if (movie.adult) buildAdultMark(),
+                SizedBox(height: 4),
+                buildGenre(),
+                SizedBox(height: 0.88),
+                buildPublishedDate(),
+                SizedBox(height: 7.98),
+                buildRating()
+              ],
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildRating() {
+    return Container(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          RatingStars(rating: (movie.voteAverage / 2).round(), starSize: 13.0),
+          SizedBox(width: 8.0),
+          buildRatingScore()
+        ],
+      ),
+    );
+  }
+
+  Widget buildRatingScore() {
+    return Container(
+      height: 17.98,
+      child: Center(
+        child: Text(movie.voteAverage.toString(),
+            style: TextStyle(
+              fontFamily: "NotoSansKR",
+              fontStyle: FontStyle.normal,
+              fontWeight: FontWeight.w700,
+              fontSize: 12.0,
+              height: UnitHelper.getTextHeightRatio(
+                  heightInPixel: 17.0, fontSizeInPixel: 12.0),
+              letterSpacing: UnitHelper.getPixel(em: -0.015),
+              color: ColorList.starYellow,
+            )),
+      ),
+    );
+  }
+
+  Widget buildBackdropImage() {
     return Container(
       height: 296,
       decoration: BoxDecoration(
         image: DecorationImage(
           fit: BoxFit.cover,
-          image: NetworkImage("https://picsum.photos/200"),
+          image: NetworkImage(movie.backdropImage),
         ),
       ),
     );
@@ -133,7 +168,7 @@ class MovieInfoArea extends StatelessWidget {
     return Container(
       height: 16.0,
       child: Text(
-        "드라마, SF",
+        movie.genreIds.toString(),
         textAlign: TextAlign.center,
         style: TextStyle(
           fontFamily: "NotoSansKR",
@@ -153,7 +188,7 @@ class MovieInfoArea extends StatelessWidget {
     return Container(
       height: 16.0,
       child: Text(
-        "2020-12-10 발매",
+        movie.releaseDate,
         textAlign: TextAlign.center,
         style: TextStyle(
           fontFamily: "NotoSansKR",

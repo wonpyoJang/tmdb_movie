@@ -1,4 +1,6 @@
+import 'package:athenaslab_test/data/model/movie.dart';
 import 'package:athenaslab_test/presentation/movie_detail/movie_detail_screen.dart';
+import 'package:athenaslab_test/presentation/movie_detail/movie_detail_view_model.dart';
 import 'package:athenaslab_test/presentation/movie_list/main_movie_list_screen.dart';
 import 'package:athenaslab_test/presentation/movie_list/main_movie_list_view_model.dart';
 import 'package:flutter/material.dart';
@@ -17,12 +19,22 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       initialRoute: ScreenList.root,
-      routes: {
-        ScreenList.root: (context) =>
-            ChangeNotifierProvider<MainMovieListViewModel>(
+      onGenerateRoute: (settings) {
+        if (settings.name == ScreenList.movieDetail) {
+          final Movie movie = settings.arguments as Movie;
+
+          return MaterialPageRoute(builder: (context) {
+            return ChangeNotifierProvider<MovieDetailViewModel>(
+                create: (context) => MovieDetailViewModel(movie: movie),
+                child: MovieDetailScreen(movie: movie));
+          });
+        } else if (settings.name == ScreenList.root) {
+          return MaterialPageRoute(builder: (context) {
+            return ChangeNotifierProvider<MainMovieListViewModel>(
                 create: (context) => MainMovieListViewModel(),
-                child: MainMovieListScreen()),
-        ScreenList.movieDetail: (context) => MovieDetailScreen(),
+                child: MainMovieListScreen());
+          });
+        }
       },
       theme: ThemeData(
         primarySwatch: Colors.blue,

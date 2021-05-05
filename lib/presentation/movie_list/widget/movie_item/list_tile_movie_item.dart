@@ -18,7 +18,7 @@ class ListTileMovieItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).pushNamed(ScreenList.movieDetail);
+        Navigator.of(context).pushNamed(ScreenList.movieDetail, arguments: movie);
       },
       child: Container(
           child: Row(
@@ -39,7 +39,7 @@ class ListTileMovieItem extends StatelessWidget {
               children: [
                 MovieTitle(title: movie.title),
                 SizedBox(height: 4.0),
-                Rating(
+                RatingStars(
                   rating: 3,
                   starSize: 9.0,
                 ),
