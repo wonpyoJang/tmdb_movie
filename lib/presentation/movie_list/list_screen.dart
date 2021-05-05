@@ -5,8 +5,8 @@ import 'widget/listview/horizontal_slider.dart';
 import 'widget/list_screen_area.dart';
 import 'widget/listview/vertical_list_view.dart';
 
-class ListScreen extends StatelessWidget {
-  const ListScreen({Key? key}) : super(key: key);
+class MainMovieListScreen extends StatelessWidget {
+  const MainMovieListScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
