@@ -1,6 +1,8 @@
 import 'package:athenaslab_test/presentation/movie_detail/movie_detail_screen.dart';
 import 'package:athenaslab_test/presentation/movie_list/main_movie_list_screen.dart';
+import 'package:athenaslab_test/presentation/movie_list/main_movie_list_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'symbols/route_list.dart';
 
@@ -16,13 +18,18 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       initialRoute: ScreenList.root,
       routes: {
-        ScreenList.root: (context) => MainMovieListScreen(),
+        ScreenList.root: (context) =>
+            ChangeNotifierProvider<MainMovieListViewModel>(
+                create: (context) => MainMovieListViewModel(),
+                child: MainMovieListScreen()),
         ScreenList.movieDetail: (context) => MovieDetailScreen(),
       },
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MainMovieListScreen(),
+      home: ChangeNotifierProvider<MainMovieListViewModel>(
+          create: (context) => MainMovieListViewModel(),
+          child: MainMovieListScreen()),
     );
   }
 }

@@ -36,10 +36,10 @@ class Movie {
   final bool video;
 
   @JsonKey(name: "vote_average")
-  final bool voteAverage;
+  final double voteAverage;
 
   @JsonKey(name: "vote_count")
-  final bool voteCount;
+  final int voteCount;
 
 
   Movie(this.adult, this.backdropPath, this.genreIds, this.id, this.originalTitle, this.overview, this.posterPath, this.releaseDate, this.title, this.video, this.voteAverage, this.voteCount);

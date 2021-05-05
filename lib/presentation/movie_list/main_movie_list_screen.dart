@@ -1,13 +1,27 @@
+import 'package:athenaslab_test/presentation/movie_list/main_movie_list_view_model.dart';
 import 'package:athenaslab_test/presentation/movie_list/widget/movie_item/card_movie_item.dart';
 import 'package:athenaslab_test/presentation/widget/listview/horizontal_slider.dart';
 import 'package:athenaslab_test/presentation/widget/listview/vertical_list_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'widget/list_screen_area.dart';
 import 'widget/movie_item/list_tile_movie_item.dart';
 
-class MainMovieListScreen extends StatelessWidget {
+class MainMovieListScreen extends StatefulWidget {
   const MainMovieListScreen({Key? key}) : super(key: key);
+
+  @override
+  _MainMovieListScreenState createState() => _MainMovieListScreenState();
+}
+
+class _MainMovieListScreenState extends State<MainMovieListScreen> {
+  @override
+  void initState() {
+    super.initState();
+    var viewModel = getViewModel(context, listen: false);
+    viewModel.getInitialContents();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +41,7 @@ class MainMovieListScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(height: 23),
-          buildCurrentScreeningArea(),
+          buildCurrentScreeningArea(context),
           SizedBox(height: 40),
           buildComingSoonArea(),
           SizedBox(height: 24),
@@ -42,7 +56,8 @@ class MainMovieListScreen extends StatelessWidget {
     );
   }
 
-  Widget buildCurrentScreeningArea() {
+  Widget buildCurrentScreeningArea(BuildContext context) {
+    var viewModel = getViewModel(context, listen: true);
     return Padding(
         padding: EdgeInsets.only(left: 16.0),
         child: ListScreenArea(
@@ -50,6 +65,7 @@ class MainMovieListScreen extends StatelessWidget {
           content: HorizontalSlider(
             height: 196,
             spacing: 17.0,
+            itemCount: 100,
             itemBuilder: (context, index) => CardMovieItem(),
           ),
         ));
@@ -86,5 +102,10 @@ class MainMovieListScreen extends StatelessWidget {
               spacing: 8.0,
               itemBuilder: (context, index) => ListTileMovieItem()),
         ));
+  }
+
+  MainMovieListViewModel getViewModel(BuildContext context,
+      {required bool listen}) {
+    return Provider.of<MainMovieListViewModel>(context, listen: listen);
   }
 }

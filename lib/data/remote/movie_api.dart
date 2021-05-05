@@ -8,10 +8,10 @@ enum MovieApiCallType {
 }
 
 Map<MovieApiCallType, String> endpointFromType = {
-  MovieApiCallType.NOW_PLAYING: "/movie/now_playing",
-  MovieApiCallType.POPULAR: "/movie/popular",
-  MovieApiCallType.TOP_RATE: "/movie/top_rated",
-  MovieApiCallType.UPCOMING: "/movie/upcoming",
+  MovieApiCallType.NOW_PLAYING: "/3/movie/now_playing",
+  MovieApiCallType.POPULAR: "/3/movie/popular",
+  MovieApiCallType.TOP_RATE: "/3/movie/top_rated",
+  MovieApiCallType.UPCOMING: "/3/movie/upcoming",
 };
 
 abstract class MovieApi {

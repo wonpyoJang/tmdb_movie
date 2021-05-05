@@ -4,12 +4,14 @@ class HorizontalSlider extends StatelessWidget {
   final double height;
   final Function itemBuilder;
   final double spacing;
+  final int itemCount;
 
   const HorizontalSlider(
       {Key? key,
       required this.height,
       required this.itemBuilder,
-      required this.spacing})
+      required this.spacing,
+      required this.itemCount})
       : super(key: key);
 
   @override
@@ -19,7 +21,7 @@ class HorizontalSlider extends StatelessWidget {
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         shrinkWrap: true,
-        itemCount: 100,
+        itemCount: itemCount,
         itemBuilder: (BuildContext context, int index) {
           Widget content = itemBuilder(context, index);
           return Padding(padding: EdgeInsets.only(right: spacing), child: content);

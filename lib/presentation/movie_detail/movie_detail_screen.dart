@@ -39,6 +39,7 @@ class MovieDetailScreen extends StatelessWidget {
               content: HorizontalSlider(
                 height: 54.0,
                 spacing: 16.0,
+                itemCount: 100,
                 itemBuilder: (context, index) => ActorItem(),
               )),
           SizedBox(height: 24.0),

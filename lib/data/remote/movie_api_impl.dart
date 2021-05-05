@@ -15,10 +15,10 @@ class MovieApiImpl implements MovieApi {
         'api_key': API_KEY,
       };
 
-      Uri url = Uri.https('https://api.themoviedb.org/3',
-          endpointFromType[type] ?? "/movie/now_playing", queryParameters);
+      Uri uri = Uri.https('api.themoviedb.org',
+          endpointFromType[type] ?? "/3/movie/now_playing", queryParameters);
 
-      final response = await http.get(url);
+      final response = await http.get(uri);
       if (response.statusCode == 200) {
         Map<String, dynamic> mapResponse = json.decode(response.body);
 
