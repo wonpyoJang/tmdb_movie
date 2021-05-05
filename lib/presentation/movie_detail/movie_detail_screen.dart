@@ -1,10 +1,10 @@
 import 'package:athenaslab_test/presentation/movie_detail/widget/actor_item.dart';
 import 'package:athenaslab_test/presentation/movie_detail/widget/area_title.dart';
 import 'package:athenaslab_test/presentation/movie_detail/widget/movie_summary_area.dart';
+import 'package:athenaslab_test/presentation/utils/unit_helper.dart';
 import 'package:athenaslab_test/presentation/widget/listview/horizontal_slider.dart';
 import 'package:athenaslab_test/presentation/widget/listview/vertical_list_view.dart';
 import 'package:athenaslab_test/symbols/color_list.dart';
-import 'package:athenaslab_test/utils/unit_helper.dart';
 import 'package:flutter/material.dart';
 
 class MovieDetailScreen extends StatelessWidget {

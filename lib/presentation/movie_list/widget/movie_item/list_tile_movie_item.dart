@@ -1,8 +1,8 @@
+import 'package:athenaslab_test/presentation/utils/unit_helper.dart';
 import 'package:athenaslab_test/presentation/widget/poster_image.dart';
 import 'package:athenaslab_test/presentation/widget/rating.dart';
 import 'package:athenaslab_test/symbols/color_list.dart';
 import 'package:athenaslab_test/symbols/route_list.dart';
-import 'package:athenaslab_test/utils/unit_helper.dart';
 import 'package:flutter/material.dart';
 
 import '../movie_title.dart';

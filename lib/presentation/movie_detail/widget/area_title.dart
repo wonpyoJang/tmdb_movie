@@ -1,5 +1,5 @@
+import 'package:athenaslab_test/presentation/utils/unit_helper.dart';
 import 'package:athenaslab_test/symbols/color_list.dart';
-import 'package:athenaslab_test/utils/unit_helper.dart';
 import 'package:flutter/material.dart';
 
 class AreaTitle extends StatelessWidget {
