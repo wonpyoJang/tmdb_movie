@@ -1,4 +1,4 @@
-import 'package:athenaslab_test/presentation/list/list_screen.dart';
+import 'package:athenaslab_test/presentation/movie_list/list_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
