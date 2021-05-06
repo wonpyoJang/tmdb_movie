@@ -63,7 +63,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
               content: HorizontalSlider(
                 height: 54.0,
                 spacing: 16.0,
-                itemCount: 100,
+                itemCount: viewModel.casts!.cast!.length,
                 itemBuilder: (context, index) =>
                     viewModel.casts?.cast?[index] != null
                         ? ActorItem(cast: viewModel.casts!.cast![index])
