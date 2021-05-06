@@ -67,6 +67,7 @@ class _MainMovieListScreenState extends State<MainMovieListScreen> {
         child: ListScreenArea(
           title: "현재 상영중",
           content: HorizontalSlider(
+            scrollController: viewModel.scrollController,
             height: 196,
             spacing: 17.0,
             itemCount: viewModel.nowPlayingMovies.length,

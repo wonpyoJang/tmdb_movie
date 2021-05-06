@@ -20,6 +20,7 @@ Map<MovieApiCallType, String> endpointFromType = {
 abstract class MovieApi {
   Future<MovieResponse> getMovies({
     required MovieApiCallType type,
+    int page = 0
   });
 
   Future<MovieDetail> getMovieDetail({

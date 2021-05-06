@@ -7,6 +7,7 @@ import 'package:athenaslab_test/data/remote/movie_api.dart';
 abstract class MovieRepository{
   Future<MovieResponse> getMovies({
     required MovieApiCallType type,
+    int page = 0
   });
 
   Future<MovieDetail> getMovieDetail({

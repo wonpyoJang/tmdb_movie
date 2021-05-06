@@ -33,7 +33,11 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
     var viewModel = getViewModel(context, listen: true);
     return Scaffold(
       backgroundColor: Colors.white,
-      body: buildBody(context),
+      body: viewModel.isLoading == true
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : buildBody(context),
     );
   }
 

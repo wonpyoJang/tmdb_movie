@@ -13,8 +13,9 @@ class MovieRepositoryImpl implements MovieRepository{
   @override
   Future<MovieResponse> getMovies({
     required MovieApiCallType type,
+    int page = 0
   }) {
-    return movieApi.getMovies(type: type);
+    return movieApi.getMovies(type: type, page: page);
   }
 
   @override

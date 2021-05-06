@@ -12,6 +12,7 @@ class MovieApiImpl implements MovieApi {
   @override
   Future<MovieResponse> getMovies({
     required MovieApiCallType type,
+    int page = 0
   }) async {
     try {
       var queryParameters = {

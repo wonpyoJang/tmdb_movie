@@ -4,6 +4,9 @@ import 'package:athenaslab_test/presentation/widget/rating.dart';
 import 'package:athenaslab_test/presentation/widget/poster_image.dart';
 import 'package:athenaslab_test/symbols/color_list.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../movie_detail_view_model.dart';
 
 class MovieInfoArea extends StatelessWidget {
   final Movie movie;
@@ -19,7 +22,7 @@ class MovieInfoArea extends StatelessWidget {
           SizedBox(height: 297),
           buildBackdropImage(),
           buildRoundedConer(),
-          buildMovieSummary()
+          buildMovieSummary(context),
         ],
       ),
     );
@@ -88,14 +91,18 @@ class MovieInfoArea extends StatelessWidget {
     );
   }
 
-  Widget buildMovieSummary() {
+  Widget buildMovieSummary(BuildContext context) {
     return Align(
       alignment: Alignment.bottomLeft,
       child: Container(
         margin: EdgeInsets.only(left: 16.0),
         child: Row(
           children: [
-            PosterImage(width: 104, height: 159, borderRadius: 8, url: movie.posterImage),
+            PosterImage(
+                width: 104,
+                height: 159,
+                borderRadius: 8,
+                url: movie.posterImage),
             SizedBox(width: 16.0),
             Column(
               mainAxisSize: MainAxisSize.min,
@@ -107,7 +114,7 @@ class MovieInfoArea extends StatelessWidget {
                 SizedBox(height: 4),
                 if (movie.adult) buildAdultMark(),
                 SizedBox(height: 4),
-                buildGenre(),
+                buildGenre(context),
                 SizedBox(height: 0.88),
                 buildPublishedDate(),
                 SizedBox(height: 7.98),
@@ -164,11 +171,17 @@ class MovieInfoArea extends StatelessWidget {
     );
   }
 
-  Widget buildGenre() {
+  Widget buildGenre(BuildContext context) {
+    var viewModel = Provider.of<MovieDetailViewModel>(context, listen: true);
+
     return Container(
       height: 16.0,
       child: Text(
-        movie.genreIds.toString(),
+        viewModel.movieDetail?.genres
+                ?.map((item) => item.name)
+                .toList()
+                .join(", ") ??
+            "",
         textAlign: TextAlign.center,
         style: TextStyle(
           fontFamily: "NotoSansKR",
